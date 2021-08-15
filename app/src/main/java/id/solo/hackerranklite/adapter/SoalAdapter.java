@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import id.solo.hackerranklite.MainActivity;
 import id.solo.hackerranklite.R;
 import id.solo.hackerranklite.SoalActivity;
 import id.solo.hackerranklite.entity.Soal;
 
 public class SoalAdapter extends RecyclerView.Adapter<SoalAdapter.SoalViewHolder> {
-    private ArrayList<Soal> dataSoal;
-    private Context context;
+    private final ArrayList<Soal> dataSoal;
+    private final Context context;
 
     public SoalAdapter(Context context, ArrayList<Soal> dataSoal) {
         this.context = context;
@@ -57,7 +56,7 @@ public class SoalAdapter extends RecyclerView.Adapter<SoalAdapter.SoalViewHolder
         return dataSoal.size();
     }
 
-    public class SoalViewHolder extends RecyclerView.ViewHolder {
+    public static class SoalViewHolder extends RecyclerView.ViewHolder {
         TextView tvJudulSoal, tvDifficultySoal, tvKategoriSoal;
         Button btnStartSoal;
 

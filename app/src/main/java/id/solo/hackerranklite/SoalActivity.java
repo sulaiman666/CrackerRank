@@ -1,9 +1,9 @@
 package id.solo.hackerranklite;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 import id.solo.hackerranklite.codeview.CodeView;
 import id.solo.hackerranklite.entity.Code;
@@ -27,7 +27,6 @@ import id.solo.hackerranklite.services.JCInterface;
 import id.solo.hackerranklite.services.SoalInterface;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,7 +61,7 @@ public class SoalActivity extends AppCompatActivity {
 
         btnSubmit.setOnClickListener(v -> {
             // Encode code
-            String codeResult = edtCode.getText().toString();
+            String codeResult = Objects.requireNonNull(edtCode.getText()).toString();
             byte[] codeData = codeResult.getBytes(StandardCharsets.UTF_8);
             String base64 = Base64.encodeToString(codeData, Base64.DEFAULT);
 
@@ -80,7 +79,7 @@ public class SoalActivity extends AppCompatActivity {
 
             call.enqueue(new Callback<Token>() {
                 @Override
-                public void onResponse(Call<Token> call, Response<Token> response) {
+                public void onResponse(@NonNull Call<Token> call, @NonNull Response<Token> response) {
                     assert response.body() != null;
                     Toast.makeText(SoalActivity.this, response.body().getToken(), Toast.LENGTH_SHORT).show();
 
@@ -88,7 +87,7 @@ public class SoalActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Token> call, Throwable t) {
+                public void onFailure(@NonNull Call<Token> call, @NonNull Throwable t) {
                     Toast.makeText(SoalActivity.this, "Submission Error", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -101,7 +100,7 @@ public class SoalActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<SubmissionCode>() {
             @Override
-            public void onResponse(Call<SubmissionCode> call, Response<SubmissionCode> response) {
+            public void onResponse(@NonNull Call<SubmissionCode> call, @NonNull Response<SubmissionCode> response) {
                 assert response.body() != null;
                 // Compile success
                 if (response.body().getStatus().getId() == 3) {
@@ -123,12 +122,10 @@ public class SoalActivity extends AppCompatActivity {
                                 "Output yang benar\n" +
                                 soal.getJawabanSoal());
                         dialog.setPositiveButton("Coba lagi!",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Toast.makeText(getApplicationContext(), "Semangat! Kamu bisa", Toast.LENGTH_LONG).show();
-                                    }
-                                });
+                                (dialogInterface, i) ->
+                                        Toast.makeText(getApplicationContext(),
+                                                "Semangat! Kamu bisa",
+                                                Toast.LENGTH_LONG).show());
                         AlertDialog alertDialog = dialog.create();
                         alertDialog.show();
                     }
@@ -139,19 +136,17 @@ public class SoalActivity extends AppCompatActivity {
                     dialog.setTitle(response.body().getStatus().getDescription());
                     dialog.setMessage(response.body().getCompileOutput());
                     dialog.setPositiveButton("Coba lagi!",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(getApplicationContext(), "Semangat! Kamu bisa", Toast.LENGTH_LONG).show();
-                                }
-                            });
+                            (dialogInterface, i) ->
+                                    Toast.makeText(getApplicationContext(),
+                                            "Semangat! Kamu bisa",
+                                            Toast.LENGTH_LONG).show());
                     AlertDialog alertDialog = dialog.create();
                     alertDialog.show();
                 }
             }
 
             @Override
-            public void onFailure(Call<SubmissionCode> call, Throwable t) {
+            public void onFailure(@NonNull Call<SubmissionCode> call, @NonNull Throwable t) {
                 Toast.makeText(SoalActivity.this, "Can't fetch submisson", Toast.LENGTH_SHORT).show();
             }
         });
@@ -163,12 +158,12 @@ public class SoalActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 s = response.body();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 s = "Can't upload solved condition";
             }
         });

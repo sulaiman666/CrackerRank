@@ -16,13 +16,10 @@ public class ApiClient {
     public static String URLSoal = "http://192.168.11.166:8085/";
 
     public static Retrofit getRetrofit() {
-        Interceptor interceptor = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request newRequest = chain.request().newBuilder().addHeader("dewaganteng"
-                        , "dewaganteng").build();
-                return chain.proceed(newRequest);
-            }
+        Interceptor interceptor = chain -> {
+            Request newRequest = chain.request().newBuilder().addHeader("dewaganteng"
+                    , "dewaganteng").build();
+            return chain.proceed(newRequest);
         };
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();

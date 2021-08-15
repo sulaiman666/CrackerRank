@@ -1,5 +1,6 @@
 package id.solo.hackerranklite;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<ArrayList<Soal>>() {
             @Override
-            public void onResponse(Call<ArrayList<Soal>> call, Response<ArrayList<Soal>> response) {
+            public void onResponse(@NonNull Call<ArrayList<Soal>> call, @NonNull Response<ArrayList<Soal>> response) {
                 soalAdapter = new SoalAdapter(MainActivity.this, response.body());
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Soal>> call, Throwable t) {
+            public void onFailure(@NonNull Call<ArrayList<Soal>> call, @NonNull Throwable t) {
                 Toast.makeText(MainActivity.this, "Recycler Failure", Toast.LENGTH_SHORT).show();
             }
         });
