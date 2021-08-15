@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">HackerRank Lite</string>
+    <string name="contoh_soal">
+        <b>Task</b><br />\n\n<br />
+        In this challenge, you must read <b>3</b> integers from stdin and then print them to stdout.
+        Each integer must be printed on a new line. To make the problem a little easier, a portion
+        of the code is provided for you in the editor below.<br />\n\n<br />
+        <b>Input Format</b><br />\n\n<br />
+        There are <b>3</b> lines of input, and each line contains a single integer.<br />\n\n<br />
+        <b>Sample Input</b><br />\n\n<br />
+        42<br />\n
+        100<br />\n
+        125<br />\n\n<br />
+        <b>Sample Output</b><br />\n\n<br />
+        42<br />\n
+        100<br />\n
+        125<br />\n
+    </string>
+    <string name="test_code">cHVibGljIGNsYXNzIE1haW4gewogICAgcHVibGljIHN0YXRpYyB2b2lkIG1haW4oU3RyaW5nW10gYXJncykgewogICAgICBmb3IoaW50IHggPTAgOyB4IDw1IDt4ICsrKXsKICAgICAgICAgICBmb3IgKGludCB5PTA7IHkgPDU7IHkrKyl7CiAgICAgICAgICAgIFN5c3RlbS5vdXQucHJpbnRsbigiKiIpOwogICAgICAgICAgIH0KICAgICAgICB9CiAgICB9Cn0=</string>
+    <string name="test_error">Main.java:5: error: \';\' expected\n            System.out.println(\"*\")\n                                   ^\n1 error\n</string>
+    <string name="crackerrank">CrackerRank</string>
+    <string name="test_jawaban">42\n100\n125\n</string>
+</resources>
